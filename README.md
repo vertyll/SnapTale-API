@@ -14,6 +14,9 @@ Aplikacja internetowa, jest to API dla aplikacji SnapTale
 ### Inne:
 - Laravel Sanctum jako system do uwierzytelniania
 
+### Dodatkowe narzędzia:
+- intervention/image jako biblioteka przetwarzania obrazów PHP
+
 ## Zdjęcia poglądowe aplikacji SnapTale korzystającej z tego API
 
 ![Widok projektu](https://raw.githubusercontent.com/vertyll/SnapTale/main/screenshots/snaptale4.png)
