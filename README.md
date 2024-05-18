@@ -22,7 +22,7 @@ php artisan breeze:install (FOR THIS SELECT THE API INSTALL)
 php artisan serve
 ```
 
-### Create a DATABASE. Make sure the DB_DATABASE in the .env is the same and then run this command
+Create a DATABASE. Make sure the DB_DATABASE in the .env is the same and then run this command
 
 ```
 php artisan migrate
