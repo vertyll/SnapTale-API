@@ -17,8 +17,6 @@ php artisan key:generate
 
 composer require laravel/breeze --dev
 
-php artisan breeze:install (FOR THIS SELECT THE API INSTALL)
-
 php artisan serve
 ```
 
