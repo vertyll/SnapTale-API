@@ -1,8 +1,36 @@
 # SnapTale-API
 
-## Setup
+## Założenia projektu 
 
-Make sure to install the dependencies:
+Aplikacja internetowa, jest to API dla aplikacji SnapTale
+
+## Stos technologiczny
+
+### Backend:
+- Laravel
+- PHP
+- MySQL
+
+### Inne:
+- Laravel Sanctum jako system do uwierzytelniania
+
+## Zdjęcia poglądowe aplikacji SnapTale korzystającej z tego API
+
+![Widok projektu](https://raw.githubusercontent.com/vertyll/SnapTale/main/screenshots/snaptale4.png)
+![Widok projektu](https://raw.githubusercontent.com/vertyll/SnapTale/main/screenshots/snaptale2.png)
+![Widok projektu](https://raw.githubusercontent.com/vertyll/SnapTale/main/screenshots/snaptale5.png)
+![Widok projektu](https://raw.githubusercontent.com/vertyll/SnapTale/main/screenshots/snaptale1.png)
+![Widok projektu](https://raw.githubusercontent.com/vertyll/SnapTale/main/screenshots/snaptale3.png)
+
+## Informacje dodatkowe
+
+Aplikacja łączy się z aplikacją SnapTale, która również jest dostępna w repozytrium na GitHub.
+
+## Instrukcja instalacji projektu
+
+Pobieramy projekt na lokalne środowisko
+
+Instalujemy zależności:
 
 ```bash
 composer install 
@@ -20,7 +48,7 @@ composer require laravel/breeze --dev
 php artisan serve
 ```
 
-Create a DATABASE. Make sure the DB_DATABASE in the .env is the same and then run this command
+Tworzymy bazę danych. Upewniamy się że DB_DATABASE w pliku .env jest taka sama i uruchamiamy migrację
 
 ```
 php artisan migrate
