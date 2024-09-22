@@ -12,8 +12,8 @@ Aplikacja internetowa, jest to API dla aplikacji SnapTale
 - PHP
 - MySQL
 
-### Autoryzacja:
-- autoryzacja za pomocą sesji
+### Uwierzytelnianie:
+- uwierzytelnianie za pomocą sesji
 
 ### Inne:
 - Laravel Sanctum jako system do uwierzytelniania
