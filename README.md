@@ -1,4 +1,5 @@
 # SnapTale-API
+## Link: https://snaptale.vertyll.usermd.net/
 
 ## Założenia projektu 
 
