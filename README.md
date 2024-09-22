@@ -7,7 +7,7 @@ Aplikacja internetowa, jest to API dla aplikacji SnapTale
 
 ## Stos technologiczny
 
-### Backend:
+### Back-end:
 - Laravel
 - PHP
 - MySQL
