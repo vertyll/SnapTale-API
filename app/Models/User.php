@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -43,13 +42,35 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Get all posts created by the user.
+     */
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
 
+    /**
+     * Get all comments created by the user.
+     */
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Get all followers of this user.
+     */
+    public function followers()
+    {
+        return $this->hasMany(Follow::class, 'followed_user_id');
+    }
+
+    /**
+     * Get all users this user is following.
+     */
+    public function following()
+    {
+        return $this->hasMany(Follow::class, 'user_id');
     }
 }
