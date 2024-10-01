@@ -57,6 +57,6 @@ php artisan serve
 
 Tworzymy bazę danych. Upewniamy się że DB_DATABASE w pliku .env jest taka sama i uruchamiamy migrację
 
-```
+```bash
 php artisan migrate
 ```
