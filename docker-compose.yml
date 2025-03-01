@@ -15,6 +15,16 @@ services:
         networks:
             - snaptale
 
+    maildev:
+        image: maildev/maildev
+        container_name: snaptale_maildev
+        restart: unless-stopped
+        ports:
+            - "1025:1025"
+            - "1080:1080"
+        networks:
+            - snaptale
+
 networks:
     snaptale:
         driver: bridge
