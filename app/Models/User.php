@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -45,7 +48,7 @@ class User extends Authenticatable
     /**
      * Get all posts created by the user.
      */
-    public function posts()
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
@@ -53,7 +56,7 @@ class User extends Authenticatable
     /**
      * Get all comments created by the user.
      */
-    public function comments()
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }
@@ -61,7 +64,7 @@ class User extends Authenticatable
     /**
      * Get all followers of this user.
      */
-    public function followers()
+    public function followers(): HasMany
     {
         return $this->hasMany(Follow::class, 'followed_user_id');
     }
@@ -69,7 +72,7 @@ class User extends Authenticatable
     /**
      * Get all users this user is following.
      */
-    public function following()
+    public function following(): HasMany
     {
         return $this->hasMany(Follow::class, 'user_id');
     }

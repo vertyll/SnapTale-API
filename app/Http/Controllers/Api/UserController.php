@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UsersCollection;
 use App\Models\User;
 use App\Services\FileService;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,12 +17,13 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function loggedInUser()
+    public function loggedInUser(): JsonResponse
     {
         try {
             $user = User::where('id', auth()->user()->id)->get();
+
             return response()->json(new UsersCollection($user), 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }
@@ -26,7 +31,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function updateUserImage(Request $request)
+    public function updateUserImage(Request $request): JsonResponse
     {
         $request->validate(['image' => 'required|mimes:png,jpg,jpeg']);
         if ($request->height === '' || $request->width === '' || $request->top === '' || $request->left === '') {
@@ -38,7 +43,7 @@ class UserController extends Controller
             $user->save();
 
             return response()->json(['success' => 'OK'], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }
@@ -46,7 +51,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function getUser($id)
+    public function getUser($id): JsonResponse
     {
         try {
             $user = User::findOrFail($id);
@@ -55,7 +60,7 @@ class UserController extends Controller
                 'success' => 'OK',
                 'user' => $user,
             ], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }
@@ -63,7 +68,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function updateUser(Request $request)
+    public function updateUser(Request $request): JsonResponse
     {
         $request->validate(['name' => 'required']);
 
@@ -75,7 +80,7 @@ class UserController extends Controller
             $user->save();
 
             return response()->json(['success' => 'OK'], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }

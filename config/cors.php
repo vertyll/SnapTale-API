@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
 
     /*
@@ -20,7 +22,7 @@ return [
         '/login',
         '/register',
         '/logout',
-        '/sanctum/csrf-cookie'
+        '/sanctum/csrf-cookie',
     ],
 
     'allowed_methods' => ['*'],

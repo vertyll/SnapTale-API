@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Like;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class LikeController extends Controller
@@ -11,7 +15,7 @@ class LikeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $request->validate(['post_id' => 'required']);
 
@@ -26,11 +30,11 @@ class LikeController extends Controller
                 'like' => [
                     'id' => $like->id,
                     'post_id' => $like->post_id,
-                    'user_id' => $like->user_id
+                    'user_id' => $like->user_id,
                 ],
-                'success' => 'OK'
+                'success' => 'OK',
             ], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }
@@ -38,7 +42,7 @@ class LikeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         try {
             $like = Like::find($id);
@@ -50,11 +54,11 @@ class LikeController extends Controller
                 'like' => [
                     'id' => $like->id,
                     'post_id' => $like->post_id,
-                    'user_id' => $like->user_id
+                    'user_id' => $like->user_id,
                 ],
-                'success' => 'OK'
+                'success' => 'OK',
             ], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }

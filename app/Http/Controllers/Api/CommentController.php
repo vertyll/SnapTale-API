@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -11,7 +15,7 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $request->validate([
             'post_id' => 'required',
@@ -26,7 +30,9 @@ class CommentController extends Controller
             $comment->text = $request->input('comment');
 
             $comment->save();
-        } catch (\Exception $e) {
+
+            return response()->json(['message' => 'Comment created successfully'], 201);
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }
@@ -34,14 +40,20 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         try {
             $comment = Comment::find($id);
+
+            if (! $comment) {
+                return response()->json(['error' => 'Comment not found'], 404);
+            }
+
             $comment->delete();
-        } catch (\Exception $e) {
+
+            return response()->json(null, 204);
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
-
     }
 }

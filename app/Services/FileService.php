@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
-use Image;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class FileService
 {
@@ -10,10 +12,10 @@ class FileService
     {
         $image = Image::make($request->file('image'));
 
-        if (!empty($model->image)) {
-            $currentImage = public_path() . $model->image;
+        if (! empty($model->image)) {
+            $currentImage = public_path().$model->image;
 
-            if (file_exists($currentImage) && $currentImage != public_path() . '/user-placeholder.png') {
+            if (file_exists($currentImage) && $currentImage != public_path().'/user-placeholder.png') {
                 unlink($currentImage);
             }
         }
@@ -28,9 +30,9 @@ class FileService
             $request->top
         );
 
-        $name = time() . '.' . $extension;
-        $image->save(public_path() . '/files/' . $name);
-        $model->image = '/files/' . $name;
+        $name = time().'.'.$extension;
+        $image->save(public_path().'/files/'.$name);
+        $model->image = '/files/'.$name;
 
         return $model;
     }
@@ -39,9 +41,9 @@ class FileService
     {
         $video = $request->file('video');
         $extension = $video->getClientOriginalExtension();
-        $name = time() . '.' . $extension;
-        $video->move(public_path() . '/files/', $name);
-        $model->video = '/files/' . $name;
+        $name = time().'.'.$extension;
+        $video->move(public_path().'/files/', $name);
+        $model->video = '/files/'.$name;
 
         return $model;
     }

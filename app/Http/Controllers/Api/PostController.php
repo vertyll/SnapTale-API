@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AllPostsCollection;
 use App\Models\Post;
 use App\Services\FileService;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -13,11 +17,11 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $request->validate([
             'video' => 'required|mimes:mp4',
-            'text' => 'required'
+            'text' => 'required',
         ]);
 
         try {
@@ -29,7 +33,7 @@ class PostController extends Controller
             $post->save();
 
             return response()->json(['success' => 'OK'], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }
@@ -37,7 +41,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($id): JsonResponse
     {
         try {
             $post = Post::where('id', $id)->get();
@@ -49,9 +53,9 @@ class PostController extends Controller
 
             return response()->json([
                 'post' => new AllPostsCollection($post),
-                'ids' => $ids
+                'ids' => $ids,
             ], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }
@@ -59,17 +63,17 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         try {
             $post = Post::findOrFail($id);
-            if (!is_null($post->video) && file_exists(public_path() . $post->video)) {
-                unlink(public_path() . $post->video);
+            if (! is_null($post->video) && file_exists(public_path().$post->video)) {
+                unlink(public_path().$post->video);
             }
             $post->delete();
 
             return response()->json(['success' => 'OK'], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }
